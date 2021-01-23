@@ -56,8 +56,23 @@ module wrapper (
     `endif
 
     // permanently set oeb so that outputs are always enabled: 0 is output, 1 is high-impedance
-    assign buf_io_oeb = `MPRJ_IO_PADS'h0;
+    assign buf_io_oeb      = `MPRJ_IO_PADS'h0;
+    // miket added
+    assign buf_la_data_out = `MPRJ_IO_PADS'h0;
     // instantiate your module here, connecting what you need of the above signals
+    rgb_mixer rgb_mixer0 (
+                          .clk      (wb_clk_i),
+                          .reset    (la_data_in[0]),
+                          .enc0_a   (io_in[13]),
+                          .enc0_b   (io_in[12]),
+                          .enc1_a   (io_in[11]),
+                          .enc1_b   (io_in[10]),
+                          .enc2_a   (io_in[9]),
+                          .enc2_b   (io_in[8]),
+                          .pwm0_out (buf_io_out[16]),
+                          .pwm1_out (buf_io_out[15]),
+                          .pwm2_out (buf_io_out[14])
+                         );
 
 endmodule 
 `default_nettype wire

@@ -1,0 +1,6 @@
+*.swp
+*.xml
+*.vcd
+properties
+test
+sim_build
